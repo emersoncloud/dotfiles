@@ -1,18 +1,7 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
-setopt autocd extendedglob nomatch notify
-unsetopt beep
-bindkey -v
-export NODE_OPTIONS=--openssl-legacy-provider
-# End of lines configured by zsh-newuser-install
+export PATH=$PATH:/opt/homebrew/bin
+export PATH=$PATH:/Users/emersoncloud/Library/Python/3.8/bin
 
-# The following lines were added by compinstall
-zstyle :compinstall filename '/Users/emersoncloud/.zshrc'
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-bindkey '^R' history-incremental-search-backward
