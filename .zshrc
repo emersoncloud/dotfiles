@@ -1,23 +1,54 @@
-export PATH=$PATH:/opt/homebrew/bin
-export PATH=$PATH:/Users/emersoncloud/Library/Python/3.8/bin
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export NODE_OPTIONS=--openssl-legacy-provider
-
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000000000
-SAVEHIST=1000000000
+# General
 setopt autocd extendedglob nomatch notify
 unsetopt beep
-bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/Users/emerson/.zshrc'
+bindkey -v 
+bindkey "^R" history-incremental-search-backward
+export KEYTIMEOUT=1
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+
+# Aliases
+source "$HOME/aliases"
+
+
+# Completion
+source $HOME/newcompletion.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+# Prompt
+setopt PROMPT_SUBST
+autoload -Uz vcs_info
+precmd() { vcs_info }
+
+PROMPT='%F{white}%1~%f '
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' check-for-staged-changes true
+zstyle ':vcs_info:*' get-revision true
+zstyle ':vcs_info:git*' formats "%b %F{red}%u%f%F{blue}%c%f %F{yellow}[%7.7i]%f" # hash & branch
+RPROMPT='%F{green}${vcs_info_msg_0_}%f'
+
+
+# Directory Stack
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+
+alias d='dirs -v'
+for index ({1..9}) alias "$index"="cd +${index}"; unset index
+
+
+# Edit command line in editor?
+# autoload -Uz edit-command-line
+# zle -N edit-command-line
+# bindkey -M vicmd v edit-command-line
+
+
+# Enable bd. Like cd but back up directories
+source $HOME/bd.zsh
+
+
+# Syntax highlighting
+source /Users/emerson/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
